@@ -16,7 +16,7 @@ def draw():
   gravity = vec2(0, 0.1)
   mover.applyForce(gravity)
 
-  if mousePressed(): # TODO check if mousePressed is ported as a function or variable, as currently it seems unported 
+  if mouse_pressed(): # TODO check if mousePressed is ported as a function or variable, as currently it seems unported 
     wind = vec2(0.1, 0)
     wind = vec2(0.1, 0)
     mover.applyForce(wind)

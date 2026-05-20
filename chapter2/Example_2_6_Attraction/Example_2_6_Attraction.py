@@ -29,17 +29,17 @@ def draw():
   attractor.show()
   mover.show()
 
-def mouseMoved(): 
+def mouse_moved(): 
   attractor.handleHover(mouse_x, mouse_y)
 
-def mousePressed(): 
+def mouse_pressed(): 
   attractor.handlePress(mouse_x, mouse_y)
 
-def mouseDragged(): 
+def mouse_dragged(): 
   attractor.handleHover(mouse_x, mouse_y)
   attractor.handleDrag(mouse_x, mouse_y)
 
-def mouseReleased(): 
+def mouse_released(): 
   attractor.stopDragging()
   
 run()
