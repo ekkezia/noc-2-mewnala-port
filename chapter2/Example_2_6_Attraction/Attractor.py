@@ -10,12 +10,13 @@ from math import dist
 
 # TODO ask if width and height from the main sketch file will be ported to the class or has to be defined, as currently it seems unported
 class Attractor:
-    def __init__(self):
+    def __init__(self, G = 1):
         self.position = vec2(width / 2, height / 2)
         self.mass = 20
         self.dragOffset = vec2(0, 0)
         self.dragging = False
         self.rollover = False
+        self.G = G
 
     def attract(self, mover: "Mover"):
         # Calculate direction of force
@@ -23,10 +24,10 @@ class Attractor:
         # Distance between objects
         distance = force.mag()
         # Limiting the distance to eliminate "extreme" results for very close or very far objects
-        distance = constrain(distance, 5.0, 25.0) #TODO check if constrain is ported, as currently it seems unported
+        # distance = constrain(distance, 5.0, 25.0) #TODO check if constrain is ported, as currently it seems unported
 
         # Calculate gravitational force
-        strength = (G * self.mass * mover.mass) / (distance * distance)
+        strength = (self.G * self.mass * mover.mass) / (distance * distance)
         # Get force vector --> magnitude * direction
         force.setMag(strength)
         return force
@@ -45,14 +46,14 @@ class Attractor:
 
     # The methods below are for mouse interaction
     def handlePress(self, mx, my): 
-        d = dist(mx, my, self.position.x, self.position.y) # TODO check if dist is ported, as currently it seems unported  or use math.dist  
+        d = dist(vec2(mx, my), vec2(self.position[0], self.position[1])) # TODO check if dist is ported, as currently it seems unported  or use math.dist  
         if d < self.mass:
             self.dragging = True
-            self.dragOffset.x = self.position.x - mx
-            self.dragOffset.y = self.position.y - my
+            self.dragOffset[0] = self.position[0] - mx
+            self.dragOffset[1] = self.position[1] - my
 
     def handleHover(self, mx, my):
-        d = dist(mx, my, self.position.x, self.position.y)
+        d = dist(vec2(mx, my), vec2(self.position[0], self.position[1]))
         if d < self.mass:
             self.rollover = True
         else:
@@ -63,5 +64,5 @@ class Attractor:
 
     def handleDrag(self, mx, my):
         if self.dragging:
-            self.position.x = mx + self.dragOffset.x
-            self.position.y = my + self.dragOffset.y
+            self.position[0] = mx + self.dragOffset[0]
+            self.position[1] = my + self.dragOffset[1]

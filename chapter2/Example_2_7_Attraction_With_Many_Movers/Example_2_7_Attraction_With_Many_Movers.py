@@ -16,7 +16,7 @@ def setup():
   size(640, 360)
   global movers
   for i in range(10):
-    movers[i] = Mover(random(width), random(height), random(0.5, 3)) #TODO check if random is ported, as currently it seems unported or use random from the random module
+    movers[i] = Mover(random(0, width), random(0, height), random(0.5, 3)) #TODO check if random is ported, as currently it seems unported or use random from the random module
   global attractor
   attractor = Attractor()
 
@@ -31,17 +31,17 @@ def draw():
     movers[i].update()
     movers[i].show()
 
-def mouse_moved(): 
-  attractor.handleHover(mouse_x, mouse_y)
+  if moved_x or moved_y:
+    attractor.handleHover(mouse_x, mouse_y)
 
-def mouse_pressed(): 
-  attractor.handlePress(mouse_x, mouse_y)
+  if mouse_is_pressed: 
+    attractor.handlePress(mouse_x, mouse_y)
 
-def mouse_dragged(): 
-  attractor.handleHover(mouse_x, mouse_y)
-  attractor.handleDrag(mouse_x, mouse_y)
+  if mouse_is_pressed and (moved_x or moved_y):
+    attractor.handleDrag(mouse_x, mouse_y)
 
-def mouse_released(): 
-  attractor.stopDragging()
+  # if mouse_is_released:
+  #   attractor.stopDragging()
+
   
 run()

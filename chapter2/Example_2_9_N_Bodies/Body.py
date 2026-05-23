@@ -7,7 +7,8 @@
 
 from mewnala import *
 from mewnala.math import *
-from Example_2_9_N_Bodies import G
+
+G = 1
 
 # width = 640
 # height = 360

@@ -27,19 +27,20 @@ def draw():
   mover.update()
 
   attractor.show()
+
+  if moved_x or moved_y:
+    attractor.handleHover(mouse_x, mouse_y)
+
+  if mouse_is_pressed:
+    attractor.handlePress(mouse_x, mouse_y)
+
+  if mouse_is_pressed and (moved_x or moved_y):
+    attractor.handleDrag(mouse_x, mouse_y)
+  
+  # TODO: wait for mouse_is_released update
+  # if mouse_is_released:
+  #   attractor.stopDragging()
+  
   mover.show()
-
-def mouse_moved(): 
-  attractor.handleHover(mouse_x, mouse_y)
-
-def mouse_pressed(): 
-  attractor.handlePress(mouse_x, mouse_y)
-
-def mouse_dragged(): 
-  attractor.handleHover(mouse_x, mouse_y)
-  attractor.handleDrag(mouse_x, mouse_y)
-
-def mouse_released(): 
-  attractor.stopDragging()
   
 run()

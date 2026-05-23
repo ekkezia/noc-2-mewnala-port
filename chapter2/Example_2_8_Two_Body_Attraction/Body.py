@@ -41,4 +41,4 @@ class Body:
         stroke(0)
         stroke_weight(2)
         fill(127, 100)
-        circle(4)
+        circle(self.position[0], self.position[1], self.r * 4)

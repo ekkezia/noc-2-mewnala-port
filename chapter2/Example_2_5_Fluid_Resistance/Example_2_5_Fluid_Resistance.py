@@ -51,10 +51,9 @@ def draw():
     movers[i].update()
     movers[i].show()
     movers[i].checkEdges()
-
-
-def mouse_pressed(): 
-  reset()
+  
+  if mouse_is_pressed:
+    reset()
 
 # Restart all the Mover objects randomly
 def reset():

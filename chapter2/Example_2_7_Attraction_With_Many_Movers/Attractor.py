@@ -46,14 +46,14 @@ class Attractor:
 
     # The methods below are for mouse interaction
     def handlePress(self, mx, my): 
-        d = dist(mx, my, self.position.x, self.position.y) # TODO check if dist is ported, as currently it seems unported  or use math.dist  
+        d = dist(vec2(mx, my), vec2(self.position[0], self.position[1])) # TODO check if dist is ported, as currently it seems unported  or use math.dist  
         if d < self.mass:
             self.dragging = True
-            self.dragOffset.x = self.position.x - mx
-            self.dragOffset.y = self.position.y - my
+            self.dragOffset[0] = self.position[0] - mx
+            self.dragOffset[1] = self.position[1] - my
 
     def handleHover(self, mx, my):
-        d = dist(mx, my, self.position.x, self.position.y)
+        d = dist(vec2(mx, my), vec2(self.position[0], self.position[1]))
         if d < self.mass:
             self.rollover = True
         else:
@@ -64,5 +64,5 @@ class Attractor:
 
     def handleDrag(self, mx, my):
         if self.dragging:
-            self.position.x = mx + self.dragOffset.x
-            self.position.y = my + self.dragOffset.y
+            self.position[0] = mx + self.dragOffset[0]
+            self.position[1] = my + self.dragOffset[1]
